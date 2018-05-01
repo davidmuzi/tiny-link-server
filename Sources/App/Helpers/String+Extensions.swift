@@ -14,9 +14,15 @@ extension String {
 		var randomString: String = ""
 		
 		for _ in 0..<length {
-			let randomValue = arc4random_uniform(UInt32(base.count))
+			#if os(Linux)
+				let randomValue = UInt32(random() % UInt32(base.count))
+			#else
+				let randomValue = arc4random_uniform(UInt32(base.count))
+			#endif
+			
 			randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
 		}
 		return randomString
 	}
+	
 }
