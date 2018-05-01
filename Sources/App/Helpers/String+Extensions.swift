@@ -15,7 +15,7 @@ extension String {
 		
 		for _ in 0..<length {
 			#if os(Linux)
-				let randomValue = UInt32(random() % UInt32(base.count))
+				let randomValue = UInt32(UInt32(random()) % UInt32(base.count))
 			#else
 				let randomValue = arc4random_uniform(UInt32(base.count))
 			#endif
