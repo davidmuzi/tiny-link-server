@@ -9,16 +9,15 @@ import Foundation
 
 extension String {
 	
-	static func random(length: Int = 4) -> String {
+	static func randomString(length: Int = 4) -> String {
 		let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 		var randomString: String = ""
-		let baseCount = UInt32(base.count)
 		
 		for _ in 0..<length {
 			#if os(Linux)
-				return random() % (baseCount + 1)
+				let randomValue = UInt32(random() % base.count)
 			#else
-				let randomValue = arc4random_uniform(baseCount)
+				let randomValue = arc4random_uniform(UInt32(base.count))
 			#endif
 			
 			randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
