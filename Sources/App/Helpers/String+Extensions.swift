@@ -12,12 +12,13 @@ extension String {
 	static func random(length: Int = 4) -> String {
 		let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 		var randomString: String = ""
+		let baseCount = UInt32(base.count)
 		
 		for _ in 0..<length {
 			#if os(Linux)
-				let randomValue = UInt32(UInt32(random())! % UInt32(base.count))
+				return random() % (baseCount + 1)
 			#else
-				let randomValue = arc4random_uniform(UInt32(base.count))
+				let randomValue = arc4random_uniform(baseCount)
 			#endif
 			
 			randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"

@@ -17,7 +17,7 @@ final class LinkController {
 		return try req.content.decode(Link.self).flatMap(to: Link.self) { todo in
 			
 			var link = todo
-			link.slug = "String.random()"
+			link.slug = String.random()
 			
 			return link.save(on: req)
 		}
